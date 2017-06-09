@@ -1,17 +1,28 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Today</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<div class="activity-input-container">
+  <ion-item no-lines>
+    <ion-input type="text" placeholder="Add an activity..."></ion-input>
+  </ion-item>
+</div>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let activity of activities | async">
+      <ion-item>
+        <p>{{ activity.title }}</p>
+        <p>{{ activity.categories }}</p>
+        <p class="time-stamp">{{ activity.time }}h
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteActivity(activity)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
